@@ -16,3 +16,14 @@ export async function createUser(user) {
 
     return JSON.parse(JSON.stringify(newUser))
 }
+
+export async function getUserByEmail(userEmail) {
+    await dbConnect()
+
+    const user = await User.findOne({ email: userEmail })
+
+    if(!user)
+        throw new Error('User not found')
+
+    return JSON.parse(JSON.stringify(user))
+}
