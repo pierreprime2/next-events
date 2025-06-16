@@ -1,7 +1,8 @@
 import daisyui from 'daisyui';
+import { withUt } from 'uploadthing/tw'
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,3 +10,5 @@ export default {
   ],
   plugins: [daisyui]
 };
+
+export default withUt(config)

@@ -18,11 +18,11 @@ export default function LoginForm({ callbackUrl }) {
             redirect: false
         })
 
-        if(res.status === 200) {
+        if (res.status === 200) {
             toast.success('Login successful')
             router.push(callbackUrl ?? '/profile')
         } else {
-            if(res.error === 'CredentialsSignin') {
+            if (res.error === 'CredentialsSignin') {
                 res.error = 'Wrong Password'
             }
             toast.error(`Login failed : ${res.error}`)
@@ -35,8 +35,32 @@ export default function LoginForm({ callbackUrl }) {
                 <label className='label' htmlFor='email'>
                     Email
                 </label>
-                <input type="email" />
+                <input
+                    id='email'
+                    className='input input-bordered w-full'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    type="email"
+                    placeholder='Enter your email address'
+                    required
+                />
             </div>
+            <div className='space-y-2'>
+                <label className='label' htmlFor="password">
+                    Password
+                </label>
+                <input
+                    id='password'
+                    className='input input-bordered w-full'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    type='password'
+                    placeholder='Enter password'
+                    required
+                    minLength={6}
+                />
+            </div>
+            <button className='btn btn-primary btn-block mt-4'>Log In</button>
         </form>
-    )
+    );
 }

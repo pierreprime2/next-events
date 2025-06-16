@@ -1,5 +1,4 @@
-import { getUser } from "./lib/actions/action";
-import { dbConnect } from "./lib/dbConnect";
+import { dbConnect } from "@/lib/dbConnect";
 
 
 export const metadata = {
@@ -7,7 +6,6 @@ export const metadata = {
 }
 
 export default async function Home() {
-  const users = await getUser()
   let connection
 
   try {
