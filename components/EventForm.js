@@ -43,7 +43,7 @@ export default function EventForm({ userId, type, event, eventId }) {
         let uploadedImageUrl = values.imageUrl
 
         if(files.length > 0) {
-            const uploadedImageUrl = await startUpload(files)
+            const uploadedImages = await startUpload(files)
 
             if(!uploadedImages) {
                 return
@@ -200,7 +200,53 @@ export default function EventForm({ userId, type, event, eventId }) {
                         </p>
                     )}
                 </div>
+                <div className='form-control'>
+                    <label htmlFor="description" className='label'>
+                        Description
+                    </label>
+                    <textarea
+                        rows='10'
+                        id='description'
+                        className='textarea textarea-bordered w-full'
+                        placeholder='Your description here'
+                        {...register('description', { required: true })}
+                    >
+                    </textarea>
+                    {errors.description?.type === 'required' && (
+                        <p role='alert' className='text-red-600 text-sm pt-2'>
+                            Description is required
+                        </p>
+                    )}
+                </div>
+                <div className='form-control'>
+                    <label htmlFor="imageUrl" className='label'>
+                        Event Image
+                    </label>
+                    <Controller
+                        name='imageUrl'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <ImageUploader
+                                onFieldChange={field.onChange}
+                                imageUrl={field.value}
+                                setFiles={setFiles}
+                            />
+                        )}
+                    />
+                    {errors.imageUrl?.type === 'required' && (
+                        <p role='alert' className='text-red-600 text-sm pt-2'>
+                            Event image is required
+                        </p>
+                    )}
+                </div>
             </div>
+            <button
+                type='submit'
+                className='btn btn-primary mt-4'
+            >
+                Submit
+            </button>
         </form>
     )
 }
