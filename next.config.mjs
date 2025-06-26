@@ -7,6 +7,13 @@ const nextConfig = {
                 hostname: 'utfs.io'
             }
         ]
+    },
+    webpack: (config) => {
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            bcrypt: 'bcryptjs'
+        }
+        return config
     }
 };
 
