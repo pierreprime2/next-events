@@ -3,9 +3,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSession, signOut } from 'next-auth/react'
+import { FaSearch } from 'react-icons/fa'
+import Search from './Search'
+import { Suspense } from 'react'
 
 const Navbar = () => {
     const { status, data: session } = useSession()
+    const toggleMobileSearch = () => {
+        var searchDropdown = document.getElementById('Search Dropdown')
+        searchDropdown.classList.toggle('hidden')
+    }
 
     console.log("Status:", status)
     console.log("Session:", session)
@@ -18,7 +25,28 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className='navbar-center'>
-                Search bar here
+                <div className='hidden md:block w-[32rem]'>
+                    <Suspense>
+                        <Search />
+                    </Suspense>
+                </div>
+                <div className='md:hidden'>
+                    <div
+                        id='searchIcon'
+                        className='btn btn-ghost'
+                        onClick={toggleMobileSearch}
+                    >
+                        <FaSearch size='1.5rem' />
+                    </div>
+                    <div
+                        id='searchDropdown'
+                        className='hidden absolute mt-2 left-1/4 bg-white p-2 rounded shadow-md w-72'
+                    >
+                        <Suspense>
+                            <Search />
+                        </Suspense>
+                    </div>
+                </div>
             </div>
             <div className='navbar-end'>
                 {status === 'authenticated' && session?.user && (
@@ -46,9 +74,9 @@ const Navbar = () => {
                                 <Link href='/events/create'>Create Event</Link>
                             </li>
                             <li>
-                               <button onClick={() => signOut({ callbackUrl: '/login' })}>
+                                <button onClick={() => signOut({ callbackUrl: '/login' })}>
                                     Sign out
-                               </button>
+                                </button>
                             </li>
                         </ul>
                     </div>

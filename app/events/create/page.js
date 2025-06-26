@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth"
 import { getUserByEmail } from "@/lib/actions/user.action"
 import { authConfig } from "@/app/api/auth/[...nextauth]/authConfig"
 
+export const metadata = {
+    title: 'Create Event | Next Events'
+}
+
 export default async function CreateEvents() {
     let userId = ''
     const data = await getServerSession(authConfig)

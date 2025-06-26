@@ -3,6 +3,10 @@ import { authConfig } from "@/app/api/auth/[...nextauth]/authConfig"
 import { redirect } from "next/navigation"
 import LoginForm from "@/components/LoginForm"
 
+export const metadata = {
+    title: 'Log In | Next Events'
+}
+
 export default async function Login({searchParams}) {
 
     const data = await getServerSession(authConfig)

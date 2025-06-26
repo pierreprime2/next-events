@@ -37,3 +37,11 @@ export default async function SingleEvent({ params: { id } }) {
         </>
     )
 }
+
+export async function generateMetadata({ params: { id }}) {
+    const event = await getEventById(id)
+
+    return {
+        title: event.title
+    }
+}

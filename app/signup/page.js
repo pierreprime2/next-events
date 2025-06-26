@@ -1,5 +1,9 @@
 import SignUpForm from "@/components/SignUpForm"
 
+export const metadata = {
+    title: 'Sign up | Next events'
+}
+
 export default async function SignUp() {
     return (
         <>
